@@ -1,4 +1,4 @@
-import MainPage from "../../pages/main-page/main-page";
+import MainPage from '../../pages/main-page/main-page';
 
 type AppPageProps = {
   filmCard: {
@@ -10,7 +10,7 @@ type AppPageProps = {
 
 function App({filmCard}: AppPageProps): JSX.Element {
   return (
-    <MainPage 
+    <MainPage
       filmCard = {filmCard}
     />
   );
