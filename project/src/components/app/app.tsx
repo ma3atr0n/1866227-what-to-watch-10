@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import MainPage from '../../pages/main-page/main-page';
 
 type AppPageProps = {
@@ -15,10 +14,6 @@ function App({filmCard}: AppPageProps): JSX.Element {
       filmCard = {filmCard}
     />
   );
-=======
-function App(): JSX.Element {
-  return <p>Hello, world!</p>;
->>>>>>> master
 }
 
 export default App;
