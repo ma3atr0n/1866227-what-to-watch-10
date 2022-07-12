@@ -1,4 +1,8 @@
-function PlayerPage(): JSX.Element {
+type PlayerProps = {
+  films: []
+};
+
+function PlayerPage({films}:PlayerProps): JSX.Element {
   return (
     <>
       <div className="visually-hidden">
