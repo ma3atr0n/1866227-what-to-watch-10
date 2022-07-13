@@ -36,7 +36,7 @@ function App({filmCard}: AppPageProps): JSX.Element {
           }
           />
           <Route path={AppRoute.Films}>
-            <Route path=':id/'>
+            <Route path=':id'>
               <Route index element = {<FilmsPage films={[]}/>}/>
               <Route path={AppRoute.AddReview} element = {<AddReviewPage />}/>
             </Route>
