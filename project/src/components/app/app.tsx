@@ -34,7 +34,7 @@ function App({filmCard}: AppPageProps): JSX.Element {
           </PrivateRoute>
         }
         />
-
+        /Первый вариант
         <Route path={AppRoute.Films}>
           <Route path=':id'>
             <Route index element = {<FilmsPage films={[]}/>}/>
