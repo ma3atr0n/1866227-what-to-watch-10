@@ -21,29 +21,29 @@ function App({filmCard}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Root}>
-          <Route index element = {
-            <MainPage
-              filmCard = {filmCard}
-            />
-          }
+        <Route path={AppRoute.Root} element = {
+          <MainPage
+            filmCard = {filmCard}
           />
-          <Route path={AppRoute.SignIn} element= {<SignInPage />}/>
-          <Route path={AppRoute.MyList} element= {
-            <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
-              <MyListPage />
-            </PrivateRoute>
-          }
-          />
-          <Route path={AppRoute.Films}>
-            <Route path=':id'>
-              <Route index element = {<FilmsPage films={[]}/>}/>
-              <Route path={AppRoute.AddReview} element = {<AddReviewPage />}/>
-            </Route>
+        }
+        />
+        <Route path={AppRoute.SignIn} element= {<SignInPage />}/>
+        <Route path={AppRoute.MyList} element= {
+          <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
+            <MyListPage />
+          </PrivateRoute>
+        }
+        />
+
+        <Route path={AppRoute.Films}>
+          <Route path=':id'>
+            <Route index element = {<FilmsPage films={[]}/>}/>
+            <Route path={AppRoute.AddReview} element = {<AddReviewPage />}/>
           </Route>
-          <Route path={AppRoute.Player}>
-            <Route path=':id' element = {<PlayerPage films={[]}/>}/>
-          </Route>
+        </Route>
+
+        <Route path={AppRoute.Player}>
+          <Route path=':id' element = {<PlayerPage films={[]}/>}/>
         </Route>
         <Route path='*' element={<NoPage />} />
       </Routes>
