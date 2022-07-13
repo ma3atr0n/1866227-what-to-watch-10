@@ -21,7 +21,7 @@ function App({filmCard}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main}>
+        <Route path={AppRoute.Root}>
           <Route index element = {
             <MainPage
               filmCard = {filmCard}
