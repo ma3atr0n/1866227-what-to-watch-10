@@ -2,7 +2,7 @@ import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import {Films} from '../../types/films';
 import {AppRoute} from '../../const';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 type MainPageProps = {
