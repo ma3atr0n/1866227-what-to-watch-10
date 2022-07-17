@@ -1,15 +1,16 @@
-import MainFilmCard from '../../components/main-film-card/main-film-card';
+import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
+import {Films} from '../../types/films';
+import {AppRoute} from '../../const';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 type MainPageProps = {
-    filmCard: {
-      title: string,
-      genre: string,
-      year: number
-    }
+    films: Films
   };
 
-function MainPage({filmCard}: MainPageProps): JSX.Element {
+function MainPage({films}: MainPageProps): JSX.Element {
+  const navigate = useNavigate();
   return (
     <>
       <div className="visually-hidden">
@@ -69,19 +70,20 @@ function MainPage({filmCard}: MainPageProps): JSX.Element {
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{filmCard.title}</h2>
+              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{filmCard.genre}</span>
-                <span className="film-card__year">{filmCard.year}</span>
+                <span className="film-card__genre">Drama</span>
+                <span className="film-card__year">2014</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button onClick={() => navigate(`${AppRoute.Player}/1`)} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
+
+                <button onClick={() => navigate(AppRoute.MyList)} className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
                   </svg>
@@ -131,9 +133,7 @@ function MainPage({filmCard}: MainPageProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {Array.from({length: 16}, () => <MainFilmCard key="uniq_key"/>)}
-          </div>
+          <FilmList films={films}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
