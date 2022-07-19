@@ -12,11 +12,11 @@ function FilmReview({review}: FilmReviewProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{review.author}</cite>
-          <time className="review__date" dateTime="2016-12-20">{review.date}</time>
+          <time className="review__date" dateTime={review.date.toISOString().split('T')[0]}>{review.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
         </footer>
       </blockquote>
 
-      <div className="review__rating">{review.reviewRate}</div>
+      <div className="review__rating">{review.reviewRate.toFixed(1)}</div>
     </div>
   );
 }

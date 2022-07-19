@@ -2,6 +2,24 @@ import {Films} from '../../types/films';
 import { Link, useParams } from 'react-router-dom';
 import NoPage from '../../pages/no-page/no-page';
 
+type RatingNameType = {
+  [key: string]: number[]
+}
+
+const RatingName: RatingNameType = {
+  'Bad': [0, 3],
+  'Normal': [3, 5],
+  'Good': [5, 8],
+  'Very good': [8, 10],
+  'Awesome': [10, Infinity],
+};
+
+const getRatingName = (rate: number) => {
+  const res = Object.entries(RatingName)
+    .filter(([,value]) => value[0] <= rate && value[1] > rate).flat();
+  return res[0] ? res[0] : 'Unknown';
+};
+
 type FilmOverviewProps = {
   films: Films
 }
@@ -27,9 +45,9 @@ function FilmOverview({films}: FilmOverviewProps): JSX.Element {
         </nav>
 
         <div className="film-rating">
-          <div className="film-rating__score">{film.details.rate.score}</div>
+          <div className="film-rating__score">{film.details.rate.score.toFixed(1)}</div>
           <p className="film-rating__meta">
-            <span className="film-rating__level">{film.details.rate.level}</span>
+            <span className="film-rating__level">{getRatingName(film.details.rate.score)}</span>
             <span className="film-rating__count">{`${film.details.rate.count} ratings`}</span>
           </p>
         </div>

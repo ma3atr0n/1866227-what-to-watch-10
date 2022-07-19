@@ -1,6 +1,7 @@
 import {Films} from '../../types/films';
 import { Link, useParams } from 'react-router-dom';
 import NoPage from '../../pages/no-page/no-page';
+import { getTimeFromMins } from '../../utils/common';
 
 type FilmDetailsProps = {
   films: Films
@@ -43,7 +44,7 @@ function FilmDetails({films}: FilmDetailsProps): JSX.Element {
           <div className="film-card__text-col">
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Run Time</strong>
-              <span className="film-card__details-value">{film.details.runTime}</span>
+              <span className="film-card__details-value">{getTimeFromMins(film.details.runTime)}</span>
             </p>
             <p className="film-card__details-item">
               <strong className="film-card__details-name">Genre</strong>

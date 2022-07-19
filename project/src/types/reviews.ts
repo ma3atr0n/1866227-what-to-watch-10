@@ -7,7 +7,7 @@ export type Review = {
   reviewId: string,
   text: string,
   author: string,
-  date: string,
+  date: Date,
   reviewRate: number
 }
 

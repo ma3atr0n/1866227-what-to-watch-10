@@ -14,7 +14,6 @@ import PrivateRoute from '../../components/private-route/private-route';
 import {Films} from '../../types/films';
 import { FilmsReviews } from '../../types/reviews';
 
-
 type AppPageProps = {
   films: Films
   filmsReviews: FilmsReviews
