@@ -3,19 +3,24 @@ import MainPage from '../../pages/main-page/main-page';
 import SignInPage from '../../pages/sign-in-page/sign-in-page';
 import MyListPage from '../../pages/my-list-page/my-list-page';
 import FilmPage from '../../pages/film-page/film-page';
+import FilmOverview from '../../components/film-details/film-owerview';
+import FilmDetails from '../../components/film-details/film-details';
+import FilmReviews from '../../components/film-details/film-reviews';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NoPage from '../../pages/no-page/no-page';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
-import AddReviewForm from '../../components/add-review-form/add-review-form';
 import {Films} from '../../types/films';
+import { FilmsReviews } from '../../types/reviews';
+
 
 type AppPageProps = {
   films: Films
+  filmsReviews: FilmsReviews
 };
 
-function App({films}: AppPageProps): JSX.Element {
+function App({films, filmsReviews}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -27,19 +32,20 @@ function App({films}: AppPageProps): JSX.Element {
         />
         <Route path={AppRoute.SignIn} element= {<SignInPage />}/>
         <Route path={AppRoute.MyList} element= {
-          <PrivateRoute authorizationStatus = {AuthorizationStatus.Auth}>
+          <PrivateRoute authorizationStatus = {AuthorizationStatus.NoAuth}>
             <MyListPage films = {films}/>
           </PrivateRoute>
         }
         />
 
-        <Route path={`${AppRoute.Films}/:id`}>
-          <Route index element = {<FilmPage films = {films}/>}/>
-          <Route path={AppRoute.AddReview} element = {<AddReviewPage films = {films}/>}/>
+        <Route path={`${AppRoute.Films}/:id`} element = {<FilmPage films = {films}/>}>
+          <Route index element = {<FilmOverview films = {films}/>}/>
+          <Route path='details' element = {<FilmDetails films = {films}/>}/>
+          <Route path='reviews' element = {<FilmReviews filmsReviews = {filmsReviews}/>}/>
         </Route>
+        <Route path={`${AppRoute.Films}/:id/${AppRoute.AddReview}`} element = {<AddReviewPage films = {films}/>}/>
 
         <Route path={`${AppRoute.Player}/:id`} element = {<PlayerPage films = {films}/>}/>
-        <Route path='add-review-form' element = {<AddReviewForm />}/>
         <Route path='*' element={<NoPage />} />
       </Routes>
     </BrowserRouter>

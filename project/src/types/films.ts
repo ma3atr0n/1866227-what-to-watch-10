@@ -11,7 +11,7 @@ export type Rate = {
 
 export type FilmDetail = {
   director: string,
-  starring: string,
+  starring: string[],
   runTime: number,
   description: string,
   rate: Rate

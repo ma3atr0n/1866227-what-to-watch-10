@@ -1,10 +1,5 @@
 import { useState } from 'react';
 
-const initialState = {
-  selectedOption: '8',
-  text: ''
-};
-
 type Event = {
   target: {
     id: string,
@@ -16,6 +11,16 @@ type RadioStarProps = {
   index: string,
   cb: (evt: Event) => void
 }
+
+type InitialState = {
+  selectedOption: string,
+  text: string
+}
+
+const initialState: InitialState = {
+  selectedOption: '8',
+  text: ''
+};
 
 function AddReviewForm(): JSX.Element {
   const [formData, setFormData] = useState({...initialState});
