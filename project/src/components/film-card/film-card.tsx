@@ -19,9 +19,7 @@ function FilmCard({film}: FilmCardProps): JSX.Element {
     >
       <Link className="small-film-card__link" to={`/films/${id}`}>
         <VideoPlayer film={film} isPlaying={isPlaying} setIsPlaying={setIsPlaying}/>
-        <h3 className="small-film-card__title">
-          {title}
-        </h3>
+        {!isPlaying && <h3 className="small-film-card__title">{title}</h3>}
       </Link>
     </article>
   );
