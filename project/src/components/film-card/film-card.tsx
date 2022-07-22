@@ -1,23 +1,28 @@
 
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {Film} from '../../types/films';
+import { Film } from '../../types/films';
+import { VideoPlayer } from '../video-player/video-player';
+
 
 type FilmCardProps = {
-  film: Film,
-  makeActive: Dispatch<SetStateAction<string>>
+  film: Film
 }
 
-function FilmCard({film, makeActive}: FilmCardProps): JSX.Element {
-  const {id, title, previewUrl} = film;
+function FilmCard({film}: FilmCardProps): JSX.Element {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const {id, title} = film;
+
   return (
-    <article onMouseOver={() => makeActive(id)} className="small-film-card catalog__films-card">
-      <div className="small-film-card__image">
-        <img src={previewUrl} alt={title} width="280" height="175" />
-      </div>
-      <h3 className="small-film-card__title">
-        <Link className="small-film-card__link" to={`/films/${id}`}>{title}</Link>
-      </h3>
+    <article
+      className="small-film-card catalog__films-card"
+    >
+      <Link className="small-film-card__link" to={`/films/${id}`}>
+        <VideoPlayer film={film} isPlaying={isPlaying} setIsPlaying={setIsPlaying}/>
+        <h3 className="small-film-card__title">
+          {title}
+        </h3>
+      </Link>
     </article>
   );
 }

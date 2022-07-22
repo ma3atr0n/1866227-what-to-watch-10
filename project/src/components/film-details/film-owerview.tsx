@@ -48,7 +48,7 @@ function FilmOverview({films}: FilmOverviewProps): JSX.Element {
           <div className="film-rating__score">{film.details.rate.score.toFixed(1)}</div>
           <p className="film-rating__meta">
             <span className="film-rating__level">{getRatingName(film.details.rate.score)}</span>
-            <span className="film-rating__count">{`${film.details.rate.count} ratings`}</span>
+            <span className="film-rating__count">{`${film.details.rate.count.toLocaleString('ru',{ style: 'decimal'})} ratings`}</span>
           </p>
         </div>
 
