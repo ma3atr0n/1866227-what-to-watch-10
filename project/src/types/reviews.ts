@@ -1,4 +1,4 @@
-export type FilmReviews = {
+export type OneFilmReviews = {
   filmId: string,
   reviews: Review[]
 }
@@ -11,4 +11,4 @@ export type Review = {
   reviewRate: number
 }
 
-export type FilmsReviews = FilmReviews[]
+export type FilmsReviews = OneFilmReviews[]

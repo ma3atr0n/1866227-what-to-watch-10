@@ -1,19 +1,27 @@
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { Films } from '../../types/films';
+import { FilmsReviews } from '../../types/reviews';
 import NoPage from '../../pages/no-page/no-page';
 import { AppRoute } from '../../const';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { FilmTabs } from '../../components/film-tabs/film-tabs';
 
 type FilmsProps = {
   films: Films
-};
+  filmsReviews: FilmsReviews
+}
 
 
-function FilmPage({films}: FilmsProps): JSX.Element {
+function FilmPage({films, filmsReviews}: FilmsProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
   const film = films.find((element) => element.id === params.id);
+  let filmReviews;
+  if (filmsReviews) {
+    filmReviews = filmsReviews.find((element) => element.filmId === params.id);
+  }
+
   if (film) {
     return (
       <>
@@ -74,7 +82,7 @@ function FilmPage({films}: FilmsProps): JSX.Element {
                 <img src={film.posterUrl} alt={film.title} width="218" height="327" />
               </div>
 
-              <Outlet />
+              <FilmTabs film={film} filmReviews={filmReviews}/>
             </div>
           </div>
         </section>
