@@ -6,9 +6,16 @@ import FilmCard from '../../components/film-card/film-card';
 
 type FilmListProps = {
   films: Films
+  ganre?: string,
+  count?: number
 }
 
-function FilmList({films}: FilmListProps): JSX.Element {
+function FilmList({films, ganre, count = 4}: FilmListProps): JSX.Element {
+  if (ganre) {
+    const filmsByGanre = films.filter((film) => film.genre === ganre).slice(0,count);
+    films = filmsByGanre;
+  }
+
   return (
     <div className="catalog__films-list">
       {films.map((film) => <FilmCard key={film.id} film={film}/>)}
