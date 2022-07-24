@@ -12,8 +12,8 @@ type FilmListProps = {
 
 function FilmList({films, ganre, count = 4}: FilmListProps): JSX.Element {
   if (ganre) {
-    const filmsByGanre = films.filter((film) => film.genre === ganre).slice(0,count);
-    films = filmsByGanre;
+    const filmsByganre = films.filter((film) => film.genre === ganre).slice(0,count);
+    films = filmsByganre;
   }
 
   return (
