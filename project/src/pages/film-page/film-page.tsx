@@ -92,7 +92,7 @@ function FilmPage({films, filmsReviews}: FilmsProps): JSX.Element {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            <FilmList films={films} ganre={film.genre}/>
+            <FilmList films={films} genre={film.genre}/>
           </section>
 
           <footer className="page-footer">

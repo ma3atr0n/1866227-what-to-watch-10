@@ -6,14 +6,14 @@ import FilmCard from '../../components/film-card/film-card';
 
 type FilmListProps = {
   films: Films
-  ganre?: string,
+  genre?: string,
   count?: number
 }
 
-function FilmList({films, ganre, count = 4}: FilmListProps): JSX.Element {
-  if (ganre) {
-    const filmsByganre = films.filter((film) => film.genre === ganre).slice(0,count);
-    films = filmsByganre;
+function FilmList({films, genre, count = 4}: FilmListProps): JSX.Element {
+  if (genre) {
+    const filmsBygenre = films.filter((film) => film.genre === genre).slice(0,count);
+    films = filmsBygenre;
   }
 
   return (
