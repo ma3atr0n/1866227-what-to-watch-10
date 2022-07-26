@@ -9,11 +9,11 @@ type PlayerProps = {
 function PlayerPage({films}:PlayerProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
-  const film = films.find((element) => element.id === params.id);
+  const film = films.find((element) => element.id.toString() === params.id);
   if (film) {
     return (
       <div className="player">
-        <video src={film.player.link} className="player__video" poster={film.player.poster}></video>
+        <video src={film.videoLink} className="player__video" poster={film.posterImage}></video>
         <button onClick={() => navigate(-1)} type="button" className="player__exit">Exit</button>
         <div className="player__controls">
           <div className="player__controls-row">

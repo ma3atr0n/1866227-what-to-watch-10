@@ -1,14 +1,12 @@
-export type OneFilmReviews = {
-  filmId: string,
-  reviews: Review[]
-}
-
 export type Review = {
-  reviewId: string,
-  text: string,
-  author: string,
-  date: Date,
-  reviewRate: number
+  comment: string
+  date: string
+  id: number
+  rating: number
+  user: {
+    id: number
+    name: string
+  }
 }
 
-export type FilmsReviews = OneFilmReviews[]
+export type Reviews = Review[]

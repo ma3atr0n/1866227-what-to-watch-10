@@ -1,232 +1,65 @@
-import { FilmsReviews } from '../types/reviews';
+import { Reviews } from '../types/reviews';
 
-export const filmsReviews: FilmsReviews = [
+export const filmReviews: Reviews = [
+
   {
-    filmId: '1',
-    reviews: [
-      {
-        reviewId: '1',
-        text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        author: 'Kate Muir',
-        date: new Date('2016-12-24'),
-        reviewRate: 8.9
-      },{
-        reviewId: '2',
-        text: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        author: 'Bill Goodykoontz',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '3',
-        text: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        author: 'Amanda Greever',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '4',
-        text: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
-        author: 'Matthew Lickona',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.2
-      },{
-        reviewId: '5',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.6
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
+    comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
+    date: new Date('2016-12-24').toISOString().split('T')[0],
+    id: 1,
+    rating: 8.9,
+    user: {
+      id: 1,
+      name: 'Kate Muir',
+    }
   },
   {
-    filmId: '2',
-    reviews: [
-      {
-        reviewId: '1',
-        text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        author: 'Kate Muir',
-        date: new Date('2016-12-24'),
-        reviewRate: 8.9
-      },{
-        reviewId: '2',
-        text: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        author: 'Bill Goodykoontz',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
+    comment: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
+    date: new Date('2016-11-18').toISOString().split('T')[0],
+    id: 2,
+    rating: 8.0,
+    user: {
+      id: 2,
+      name: 'Bill Goodykoontz',
+    }
   },
   {
-    filmId: '3',
-    reviews: [
-      {
-        reviewId: '1',
-        text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        author: 'Kate Muir',
-        date: new Date('2016-12-24'),
-        reviewRate: 8.9
-      },{
-        reviewId: '4',
-        text: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
-        author: 'Matthew Lickona',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.2
-      },{
-        reviewId: '5',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.6
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
+    comment: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
+    date: new Date('2016-11-18').toISOString().split('T')[0],
+    id: 3,
+    rating: 8.0,
+    user: {
+      id: 3,
+      name: 'Amanda Greever',
+    }
   },
   {
-    filmId: '4',
-    reviews: [
-      {
-        reviewId: '2',
-        text: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        author: 'Bill Goodykoontz',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '3',
-        text: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        author: 'Amanda Greever',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '4',
-        text: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
-        author: 'Matthew Lickona',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.2
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
+    comment: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
+    date: new Date('2016-11-18').toISOString().split('T')[0],
+    id: 4,
+    rating: 7.2,
+    user: {
+      id: 4,
+      name: 'Matthew Lickona',
+    }
   },
   {
-    filmId: '5',
-    reviews: [
-      {
-        reviewId: '2',
-        text: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        author: 'Bill Goodykoontz',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '3',
-        text: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        author: 'Amanda Greever',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '4',
-        text: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
-        author: 'Matthew Lickona',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.2
-      },{
-        reviewId: '5',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.6
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
+    comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
+    date: new Date('2016-12-20').toISOString().split('T')[0],
+    id: 5,
+    rating: 7.6,
+    user: {
+      id: 5,
+      name: 'Matthew Lickona',
+    }
   },
   {
-    filmId: '6',
-    reviews: [
-      {
-        reviewId: '1',
-        text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        author: 'Kate Muir',
-        date: new Date('2016-12-24'),
-        reviewRate: 8.9
-      },{
-        reviewId: '2',
-        text: 'Anderson\'s films are too precious for some, but for those of us willing to lose ourselves in them, they\'re a delight. "The Grand Budapest Hotel" is no different, except that he has added a hint of gravitas to the mix, improving the recipe.',
-        author: 'Bill Goodykoontz',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '3',
-        text: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        author: 'Amanda Greever',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      }
-    ]
+    comment: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
+    date: new Date('2016-11-18').toISOString().split('T')[0],
+    id: 6,
+    rating: 7.0,
+    user: {
+      id: 6,
+      name: 'Matthew Lickona',
+    }
   },
-  {
-    filmId: '7',
-    reviews: [
-      {
-        reviewId: '4',
-        text: 'The mannered, madcap proceedings are often delightful, occasionally silly, and here and there, gruesome and/or heartbreaking.',
-        author: 'Matthew Lickona',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.2
-      },{
-        reviewId: '5',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-12-20'),
-        reviewRate: 7.6
-      }
-    ]
-  },
-  {
-    filmId: '8',
-    reviews: [
-      {
-        reviewId: '1',
-        text: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director\'s funniest and most exquisitely designed films in years.',
-        author: 'Kate Muir',
-        date: new Date('2016-12-24'),
-        reviewRate: 8.9
-      },{
-        reviewId: '3',
-        text: 'I didn\'t find it amusing, and while I can appreciate the creativity, it\'s an hour and 40 minutes I wish I could take back.',
-        author: 'Amanda Greever',
-        date: new Date('2016-11-18'),
-        reviewRate: 8.0
-      },{
-        reviewId: '6',
-        text: 'It is certainly a magical and childlike way of storytelling, even if the content is a little more adult.',
-        author: 'Paula Fleri-Soler',
-        date: new Date('2016-11-18'),
-        reviewRate: 7.0
-      },
-    ]
-  }
 ];

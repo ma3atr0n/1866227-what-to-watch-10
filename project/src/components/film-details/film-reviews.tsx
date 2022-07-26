@@ -1,8 +1,8 @@
-import { OneFilmReviews } from '../../types/reviews';
+import { Reviews } from '../../types/reviews';
 import FilmReview from '../../components/film-details/film-review';
 
 type FilmReviewsProps = {
-  filmReviews: OneFilmReviews | undefined
+  filmReviews: Reviews | undefined
 }
 
 function FilmReviews({filmReviews}: FilmReviewsProps): JSX.Element {
@@ -10,10 +10,10 @@ function FilmReviews({filmReviews}: FilmReviewsProps): JSX.Element {
     return (
       <div className="film-card__reviews film-card__row">
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.filter((elem, index) => index % 2 === 0).map((elem) => <FilmReview key={elem.reviewId} review={elem}/>)}
+          {filmReviews.filter((elem, index) => index % 2 === 0).map((elem) => <FilmReview key={elem.id} review={elem}/>)}
         </div>
         <div className="film-card__reviews-col">
-          {filmReviews.reviews.filter((elem, index) => index % 2 !== 0).map((elem) => <FilmReview key={elem.reviewId} review={elem}/>)}
+          {filmReviews.filter((elem, index) => index % 2 !== 0).map((elem) => <FilmReview key={elem.id} review={elem}/>)}
         </div>
       </div>
     );

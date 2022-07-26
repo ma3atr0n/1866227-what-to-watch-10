@@ -9,14 +9,14 @@ import NoPage from '../../pages/no-page/no-page';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
 import {Films} from '../../types/films';
-import { FilmsReviews } from '../../types/reviews';
+import { Reviews } from '../../types/reviews';
 
 type AppPageProps = {
   films: Films
-  filmsReviews: FilmsReviews
+  filmReviews: Reviews
 };
 
-function App({films, filmsReviews}: AppPageProps): JSX.Element {
+function App({films, filmReviews}: AppPageProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -34,7 +34,7 @@ function App({films, filmsReviews}: AppPageProps): JSX.Element {
         }
         />
 
-        <Route path={`${AppRoute.Films}/:id`} element = {<FilmPage films = {films} filmsReviews={filmsReviews}/>}/>
+        <Route path={`${AppRoute.Films}/:id`} element = {<FilmPage films = {films} filmReviews={filmReviews}/>}/>
         <Route path={`${AppRoute.Films}/:id/${AppRoute.AddReview}`} element = {<AddReviewPage films = {films}/>}/>
 
         <Route path={`${AppRoute.Player}/:id`} element = {<PlayerPage films = {films}/>}/>

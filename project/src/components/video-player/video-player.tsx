@@ -37,9 +37,9 @@ function VideoPlayer({film, isPlaying, setIsPlaying}: VideoPlayerProps): JSX.Ele
         setIsPlaying(false);
       }}
       ref={playerRef}
-      src={film.player.link}
+      src={film.previewVideoLink}
       muted
-      poster={film.previewUrl}
+      poster={film.previewImage}
       width='280'
       height='175'
       style={{objectFit: 'cover'}}

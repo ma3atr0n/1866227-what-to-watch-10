@@ -1,6 +1,6 @@
 
 import {Film} from '../../types/films';
-import { OneFilmReviews } from '../../types/reviews';
+import { Reviews } from '../../types/reviews';
 import { useState } from 'react';
 import { FilmOverview } from '../film-details/film-owerview';
 import { FilmDetails } from '../film-details/film-details';
@@ -9,7 +9,7 @@ import { FilmTabName } from '../../const';
 
 type FilmOverviewProps = {
   film: Film
-  filmReviews: OneFilmReviews | undefined
+  filmReviews: Reviews | undefined
 }
 
 function FilmTabs({film, filmReviews}: FilmOverviewProps): JSX.Element {

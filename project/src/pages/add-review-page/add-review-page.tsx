@@ -11,13 +11,13 @@ type AddReviewPageParams = {
 
 function AddReviewPage({films}: AddReviewPageParams): JSX.Element {
   const params = useParams();
-  const film = films.find((element) => element.id === params.id);
+  const film = films.find((element) => element.id.toString() === params.id);
   if (film) {
     return (
       <section className="film-card film-card--full">
         <div className="film-card__header">
           <div className="film-card__bg">
-            <img src={film.backGroundUrl} alt={film.title} />
+            <img src={film.backgroundImage} alt={film.name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -28,7 +28,7 @@ function AddReviewPage({films}: AddReviewPageParams): JSX.Element {
             <nav className="breadcrumbs">
               <ul className="breadcrumbs__list">
                 <li className="breadcrumbs__item">
-                  <Link to={`${AppRoute.Films}/${film.id}`} className="breadcrumbs__link">{film.title}</Link>
+                  <Link to={`${AppRoute.Films}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
                 </li>
                 <li className="breadcrumbs__item">
                   <a className="breadcrumbs__link">Add review</a>
@@ -49,7 +49,7 @@ function AddReviewPage({films}: AddReviewPageParams): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={film.previewUrl} alt={`${film.title} poster`} width="218" height="327" />
+            <img src={film.previewImage} alt={`${film.name} poster`} width="218" height="327" />
           </div>
         </div>
 
