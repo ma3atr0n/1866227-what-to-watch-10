@@ -1,3 +1,5 @@
+export const SHOW_FILM_COUNT = 8;
+
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',

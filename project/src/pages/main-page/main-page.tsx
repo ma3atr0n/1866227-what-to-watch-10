@@ -4,7 +4,10 @@ import {Films} from '../../types/films';
 import {AppRoute} from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { GenreList } from '../../components/genre-list/genre-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { ShowMore } from '../../components/show-more/show-more';
+import { useEffect } from 'react';
+import { resetFilmCount } from '../../store/action';
 
 
 type MainPageProps = {
@@ -13,7 +16,15 @@ type MainPageProps = {
 
 function MainPage({films}: MainPageProps): JSX.Element {
   const navigate = useNavigate();
+  const showCount = useAppSelector((state) => state.showCount);
   const stateFilms = useAppSelector((state) => state.films);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => () => {
+    dispatch(resetFilmCount());
+  }, []);
+
   return (
     <>
       <section className="film-card">
@@ -73,11 +84,9 @@ function MainPage({films}: MainPageProps): JSX.Element {
 
           <GenreList films={films}/>
 
-          <FilmList films={stateFilms}/>
+          <FilmList films={stateFilms.slice(0, showCount)}/>
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {showCount < stateFilms.length && <ShowMore />}
         </section>
 
         <footer className="page-footer">

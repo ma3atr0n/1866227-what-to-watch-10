@@ -4,4 +4,8 @@ export const changeGenre = createAction('film/changegenre', (genre) => ({
   payload: genre
 }));
 
-export const setFilmsByGenre = createAction('film/getFilmsBygenre');
+export const setFilmsByGenre = createAction('film/setFilmsBygenre');
+
+export const showMore = createAction('film/showMode');
+
+export const resetFilmCount = createAction('film/resetFilmCount');

@@ -153,5 +153,24 @@ export const films: Films = [
     released: 2021,
     isFavorite: true
   },
+  {
+    id: 9,
+    name: 'Однажды в пустыне',
+    posterImage: 'img/7.jpg',
+    previewImage: 'https://avatars.mds.yandex.net/get-kino-vod-films-gallery/28788/fbf3f06b95641fd93a7ffaab49567565/540x304',
+    backgroundImage: 'img/7.jpg',
+    backgroundColor: 'black',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    previewVideoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    description: 'Сирия, 2016 год. Шаберову нравилось быть сапером, вступать в схватку со смертью один на один. Нравилось побеждать — победителей не судят. Разминирование захваченной боевиками Пальмиры должно было стать пиком карьеры, красивой точкой. Там же ждала девушка, полусирийка-полурусская, которую недавно спас и втайне мечтал увидеть снова. Сердце замирало от планов. Но чем ближе к древнему городу, тем жарче разгорался конфликт с молодым капитаном группы и всё жестче и коварнее действовал враг. Риск, принципы, смерть и любовь сплелись в один плотный узел, как провода детонатора в ожидании взрыва: развязать невозможно, перерезать опасно.',
+    rating: 5.5,
+    scoresCount: 122,
+    director: 'Андрей Кравчук',
+    starring: ['Александр Робак, Павел Чинарёв, Александр Метёлкин, Екатерина Нестерова, Екатерина Нестерова, Игорь Гордин, Полина Пушкарук, Виталия Корниенко, Анна Потебня, Олег Васильков, Сергей Бородинов, Алексей Комашко, Самвел Мужикян, Закария Аль-Язиди, Петр Харченко'],
+    runTime: 116,
+    genre: 'Crime',
+    released: 2022,
+    isFavorite: false
+  },
 ];
 
