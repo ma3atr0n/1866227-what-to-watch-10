@@ -1,22 +1,22 @@
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Films } from '../../types/films';
 import { Reviews } from '../../types/reviews';
 import NoPage from '../../pages/no-page/no-page';
 import { AppRoute } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { FilmTabs } from '../../components/film-tabs/film-tabs';
 import FilmList from '../../components/film-list/film-list';
+import { useAppSelector } from '../../hooks';
 
 type FilmsProps = {
-  films: Films
   filmReviews: Reviews
 }
 
 
-function FilmPage({films, filmReviews}: FilmsProps): JSX.Element {
+function FilmPage({filmReviews}: FilmsProps): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
+  const films = useAppSelector((state) => state.films);
   const film = films.find((element) => element.id.toString() === params.id);
   if (film) {
     return (
@@ -87,7 +87,7 @@ function FilmPage({films, filmReviews}: FilmsProps): JSX.Element {
           <section className="catalog catalog--like-this">
             <h2 className="catalog__title">More like this</h2>
 
-            <FilmList films={films} genre={film.genre}/>
+            <FilmList genre={film.genre}/>
           </section>
 
           <footer className="page-footer">

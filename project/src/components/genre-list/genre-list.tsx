@@ -3,16 +3,14 @@ import { Genre } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre, setFilmsByGenre } from '../../store/action';
 
-type GenreListProps = {
-  films: Films
-}
 
 const getGenreList = (films: Films) => ['All genres',...new Set(films.map((film) => film.genre))];
 
 
-function GenreList ({films}: GenreListProps) {
+function GenreList () {
   const dispatch = useAppDispatch();
   const activeGenre = useAppSelector((state) => state.genre);
+  const films = useAppSelector((state) => state.films);
   return (
     <ul className="catalog__genres-list">
       {getGenreList(films).map((filmGenre) => (

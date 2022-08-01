@@ -1,14 +1,12 @@
-import { Films } from '../../types/films';
 import NoPage from '../../pages/no-page/no-page';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 
-type PlayerProps = {
-  films: Films
-};
 
-function PlayerPage({films}:PlayerProps): JSX.Element {
+function PlayerPage(): JSX.Element {
   const navigate = useNavigate();
   const params = useParams();
+  const films = useAppSelector((state) => state.films);
   const film = films.find((element) => element.id.toString() === params.id);
   if (film) {
     return (

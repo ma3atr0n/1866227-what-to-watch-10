@@ -1,19 +1,21 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, resetFilmCount, setFilmsByGenre, showMore } from './action';
+import { changeGenre, resetFilmCount, setFilms, setFilmsByGenre, showMore } from './action';
 import { Films } from '../types/films';
 import { films } from '../mocks/films';
 import { Genre, SHOW_FILM_COUNT } from '../const';
 
 type InitialState ={
   genre: keyof typeof Genre,
-  films: Films
-  showCount: number
+  filmsByGenre: Films,
+  showCount: number,
+  films: Films,
 }
 
 const initialState: InitialState = {
   genre: 'All genres',
+  filmsByGenre: films,
+  showCount: SHOW_FILM_COUNT,
   films: films,
-  showCount: SHOW_FILM_COUNT
 };
 
 const reducer = createReducer(initialState, (bilder) => {
@@ -23,16 +25,19 @@ const reducer = createReducer(initialState, (bilder) => {
   });
   bilder.addCase(setFilmsByGenre, (state) => {
     if(state.genre === Genre['All genres']) {
-      state.films = films;
+      state.filmsByGenre = films;
       return;
     }
-    state.films = films.filter((film) => film.genre === state.genre);
+    state.filmsByGenre = films.filter((film) => film.genre === state.genre);
   });
   bilder.addCase(showMore, (state) => {
     state.showCount += SHOW_FILM_COUNT;
   });
   bilder.addCase(resetFilmCount, (state) => {
     state.showCount = SHOW_FILM_COUNT;
+  });
+  bilder.addCase(setFilms, (state) => {
+    state.films = films;
   });
 });
 

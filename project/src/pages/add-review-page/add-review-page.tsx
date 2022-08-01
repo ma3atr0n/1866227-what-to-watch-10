@@ -1,16 +1,14 @@
 import Logo from '../../components/logo/logo';
 import { Link, useParams } from 'react-router-dom';
-import { Films } from '../../types/films';
 import NoPage from '../../pages/no-page/no-page';
 import {AppRoute} from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
+import { useAppSelector } from '../../hooks';
 
-type AddReviewPageParams = {
-  films: Films
-}
 
-function AddReviewPage({films}: AddReviewPageParams): JSX.Element {
+function AddReviewPage(): JSX.Element {
   const params = useParams();
+  const films = useAppSelector((state) => state.films);
   const film = films.find((element) => element.id.toString() === params.id);
   if (film) {
     return (
