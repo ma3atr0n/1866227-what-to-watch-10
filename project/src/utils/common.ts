@@ -5,4 +5,6 @@ const getTimeFromMins = (mins: number): string => {
   return `${hours}h ${minutes}m`;
 };
 
-export {getTimeFromMins};
+const getFormatDateByString = (string: string) => new Date(string).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+export {getTimeFromMins, getFormatDateByString};
