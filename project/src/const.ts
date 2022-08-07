@@ -1,5 +1,7 @@
 export const SHOW_FILM_COUNT = 8;
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export enum AppRoute {
   Root = '/',
   SignIn = '/login',
@@ -32,4 +34,13 @@ export enum Genre {
   Romance = 'Romance',
   'Sci-Fi' = 'Sci-Fi',
   Thriller = 'Thrillers'
+}
+
+export enum APIRoute {
+  Films = '/films',
+  Promo = '/promo',
+  Favorite = '/favorite',
+  Comments = '/comments',
+  Login = '/login',
+  Logout = '/logout',
 }

@@ -1,44 +1,61 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, resetFilmCount, setFilms, setFilmsByGenre, showMore } from './action';
+import { changeGenre, requireAuthorization, resetFilmCount, setDataLoadedStatus, setError, setFilms, setFilmsByGenre, showMore } from './action';
 import { Films } from '../types/films';
-import { films } from '../mocks/films';
-import { Genre, SHOW_FILM_COUNT } from '../const';
+//import { films } from '../mocks/films';
+import { AuthorizationStatus, Genre, SHOW_FILM_COUNT } from '../const';
+import { Error } from '../types/error';
 
 type InitialState ={
   genre: keyof typeof Genre,
   filmsByGenre: Films,
   showCount: number,
   films: Films,
+  authorizationStatus: AuthorizationStatus,
+  isDataLoaded: boolean,
+  error: Error
 }
 
 const initialState: InitialState = {
   genre: 'All genres',
-  filmsByGenre: films,
+  filmsByGenre: [],
   showCount: SHOW_FILM_COUNT,
-  films: films,
+  films: [],
+  authorizationStatus: AuthorizationStatus.Unknown,
+  isDataLoaded: true,
+  error: null
 };
 
-const reducer = createReducer(initialState, (bilder) => {
-  bilder.addCase(changeGenre, (state, action) => {
-    state.genre = action.payload;
-    state.showCount = SHOW_FILM_COUNT;
-  });
-  bilder.addCase(setFilmsByGenre, (state) => {
-    if(state.genre === Genre['All genres']) {
-      state.filmsByGenre = films;
-      return;
-    }
-    state.filmsByGenre = films.filter((film) => film.genre === state.genre);
-  });
-  bilder.addCase(showMore, (state) => {
-    state.showCount += SHOW_FILM_COUNT;
-  });
-  bilder.addCase(resetFilmCount, (state) => {
-    state.showCount = SHOW_FILM_COUNT;
-  });
-  bilder.addCase(setFilms, (state) => {
-    state.films = films;
-  });
+const reducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(changeGenre, (state, action) => {
+      state.genre = action.payload;
+      state.showCount = SHOW_FILM_COUNT;
+    })
+    .addCase(setFilmsByGenre, (state) => {
+      if(state.genre === Genre['All genres']) {
+        state.filmsByGenre = state.films;
+        return;
+      }
+      state.filmsByGenre = state.films.filter((film) => film.genre === state.genre);
+    })
+    .addCase(showMore, (state) => {
+      state.showCount += SHOW_FILM_COUNT;
+    })
+    .addCase(resetFilmCount, (state) => {
+      state.showCount = SHOW_FILM_COUNT;
+    })
+    .addCase(setFilms, (state, action) => {
+      state.films = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
+    .addCase(setDataLoadedStatus, (state, action) => {
+      state.isDataLoaded = action.payload;
+    });
 });
 
 export {reducer};

@@ -9,12 +9,23 @@ import NoPage from '../../pages/no-page/no-page';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
 import { Reviews } from '../../types/reviews';
+import { useAppSelector } from '../../hooks';
+import { Loading } from '../loading/loading';
+import { isCheckedAuth } from '../../film';
 
 type AppPageProps = {
   filmReviews: Reviews
 };
 
 function App({filmReviews}: AppPageProps): JSX.Element {
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+
+  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+    return (
+      <Loading />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -40,3 +51,5 @@ function App({filmReviews}: AppPageProps): JSX.Element {
 }
 
 export default App;
+
+
