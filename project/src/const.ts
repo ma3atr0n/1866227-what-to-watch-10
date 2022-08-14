@@ -44,3 +44,8 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
 }
+
+export enum LoadingObject {
+  Root = 'root',
+  Film = 'film',
+}

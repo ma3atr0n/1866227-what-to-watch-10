@@ -1,23 +1,36 @@
 import { Link, useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Reviews } from '../../types/reviews';
 import NoPage from '../../pages/no-page/no-page';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus, LoadingObject } from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { FilmTabs } from '../../components/film-tabs/film-tabs';
 import FilmList from '../../components/film-list/film-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmAction, fetchFilmSimilarAction } from '../../store/api-action';
+import { useEffect } from 'react';
+import { Loading } from '../../components/loading/loading';
 
-type FilmsProps = {
-  filmReviews: Reviews
-}
-
-
-function FilmPage({filmReviews}: FilmsProps): JSX.Element {
+function FilmPage(): JSX.Element {
+  const {id} = useParams();
   const navigate = useNavigate();
-  const params = useParams();
-  const films = useAppSelector((state) => state.films);
-  const film = films.find((element) => element.id.toString() === params.id);
+  const film = useAppSelector((state) => state.film);
+  const loadingObject = useAppSelector((state) => state.loadingObject);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilmAction(id));
+      dispatch(fetchFilmSimilarAction(id));
+    }
+  }, [dispatch, id]);
+
+  if (loadingObject === LoadingObject.Film) {
+    return (
+      <Loading />
+    );
+  }
+
   if (film) {
     return (
       <>
@@ -66,7 +79,7 @@ function FilmPage({filmReviews}: FilmsProps): JSX.Element {
                     <span>My list</span>
                     <span className="film-card__count">9</span>
                   </button>
-                  <Link to = 'review' className="btn film-card__button">Add review</Link>
+                  {authorizationStatus === AuthorizationStatus.Auth && <Link to = 'review' className="btn film-card__button">Add review</Link>}
                 </div>
               </div>
             </div>
@@ -78,7 +91,7 @@ function FilmPage({filmReviews}: FilmsProps): JSX.Element {
                 <img src={film.posterImage} alt={film.name} width="218" height="327" />
               </div>
 
-              <FilmTabs film={film} filmReviews={filmReviews}/>
+              <FilmTabs />
             </div>
           </div>
         </section>

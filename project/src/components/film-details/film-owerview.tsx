@@ -1,4 +1,4 @@
-import {Film} from '../../types/films';
+import { useAppSelector } from '../../hooks';
 
 type RatingNameType = {
   [key: string]: number[]
@@ -18,30 +18,32 @@ const getRatingName = (rate: number) => {
   return res[0] ? res[0] : 'Unknown';
 };
 
-type FilmOverviewProps = {
-  film: Film
-}
 
-function FilmOverview({film}: FilmOverviewProps): JSX.Element {
-  return (
-    <>
-      <div className="film-rating">
-        <div className="film-rating__score">{film.rating.toFixed(1)}</div>
-        <p className="film-rating__meta">
-          <span className="film-rating__level">{getRatingName(film.rating)}</span>
-          <span className="film-rating__count">{`${film.scoresCount.toLocaleString('ru',{ style: 'decimal'})} ratings`}</span>
-        </p>
-      </div>
+function FilmOverview(): JSX.Element {
+  const film = useAppSelector((state) => state.film);
+  if (film) {
+    return (
+      <>
+        <div className="film-rating">
+          <div className="film-rating__score">{film.rating.toFixed(1)}</div>
+          <p className="film-rating__meta">
+            <span className="film-rating__level">{getRatingName(film.rating)}</span>
+            <span className="film-rating__count">{`${film.scoresCount.toLocaleString('ru',{ style: 'decimal'})} ratings`}</span>
+          </p>
+        </div>
 
-      <div className="film-card__text">
-        <p>{film.description}</p>
+        <div className="film-card__text">
+          <p>{film.description}</p>
 
-        <p className="film-card__director"><strong>{`Director: ${film.director}`}</strong></p>
+          <p className="film-card__director"><strong>{`Director: ${film.director}`}</strong></p>
 
-        <p className="film-card__starring"><strong>{`Starring: ${film.starring}`}</strong></p>
-      </div>
-    </>
-  );
+          <p className="film-card__starring"><strong>{`Starring: ${film.starring}`}</strong></p>
+        </div>
+      </>
+    );
+  }
+
+  return <p>Нет данных</p>;
 }
 
 export {FilmOverview};

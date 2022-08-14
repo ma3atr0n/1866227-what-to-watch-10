@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import { filmReviews } from './mocks/reviews';
 import { store } from './hooks';
 import { checkAuthAction, fetchFilmsAction } from './store/api-action';
 import {ToastContainer} from 'react-toastify';
@@ -30,9 +29,7 @@ root.render(
         draggable
         pauseOnHover
       />
-      <App
-        filmReviews = {filmReviews}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

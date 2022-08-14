@@ -1,17 +1,22 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeGenre, requireAuthorization, resetFilmCount, setDataLoadedStatus, setFilms, setFilmsByGenre, setUserData, showMore } from './action';
-import { Films } from '../types/films';
-import { AuthorizationStatus, Genre, SHOW_FILM_COUNT } from '../const';
+import { changeGenre, requireAuthorization, resetFilmCount, setDataLoadedStatus, setFilm, setFilms, setFilmsByGenre, setFilmSimilar, setLoadingObject, setReviews, setUserData, showMore } from './action';
+import { Film, Films } from '../types/films';
+import { AuthorizationStatus, Genre, LoadingObject, SHOW_FILM_COUNT } from '../const';
 import { UserData } from '../types/user-data';
+import { Reviews } from '../types/reviews';
 
 type InitialState ={
   genre: keyof typeof Genre,
   filmsByGenre: Films,
   showCount: number,
   films: Films,
+  film: Film | null,
+  filmSimilar: Films,
+  reviews: Reviews,
   authorizationStatus: AuthorizationStatus,
   isDataLoaded: boolean,
-  userData: UserData
+  loadingObject: LoadingObject | null,
+  userData: UserData,
 }
 
 const initialState: InitialState = {
@@ -19,8 +24,12 @@ const initialState: InitialState = {
   filmsByGenre: [],
   showCount: SHOW_FILM_COUNT,
   films: [],
+  film: null,
+  filmSimilar: [],
+  reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: true,
+  loadingObject: null,
   userData: {avatarUrl: '', email: '', id: -1, name: '', token: ''},
 };
 
@@ -46,6 +55,15 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setFilms, (state, action) => {
       state.films = action.payload;
     })
+    .addCase(setFilm, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(setFilmSimilar, (state, action) => {
+      state.filmSimilar = action.payload;
+    })
+    .addCase(setReviews, (state, action) => {
+      state.reviews = action.payload;
+    })
     .addCase(setUserData, (state, action) => {
       state.userData = action.payload;
     })
@@ -54,6 +72,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
+    })
+    .addCase(setLoadingObject, (state, action) => {
+      state.loadingObject = action.payload;
     });
 });
 

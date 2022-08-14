@@ -1,28 +1,21 @@
-
-import {Film} from '../../types/films';
-import { Reviews } from '../../types/reviews';
 import { useState } from 'react';
 import { FilmOverview } from '../film-details/film-owerview';
 import { FilmDetails } from '../film-details/film-details';
 import { FilmReviews } from '../film-details/film-reviews';
 import { FilmTabName } from '../../const';
 
-type FilmOverviewProps = {
-  film: Film
-  filmReviews: Reviews | undefined
-}
 
-function FilmTabs({film, filmReviews}: FilmOverviewProps): JSX.Element {
+function FilmTabs(): JSX.Element {
   const [activeTab, setActiveTab] = useState(FilmTabName.Overview);
 
   const renderTabs = (tab: FilmTabName): JSX.Element => {
     switch (tab) {
       case FilmTabName.Overview:
-        return <FilmOverview film={film}/>;
+        return <FilmOverview />;
       case FilmTabName.Details:
-        return <FilmDetails film={film}/>;
+        return <FilmDetails />;
       default:
-        return <FilmReviews filmReviews={filmReviews}/>;
+        return <FilmReviews />;
     }
   };
 

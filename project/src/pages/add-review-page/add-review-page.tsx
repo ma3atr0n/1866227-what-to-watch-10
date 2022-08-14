@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import NoPage from '../../pages/no-page/no-page';
 import {AppRoute} from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
@@ -7,9 +7,7 @@ import { useAppSelector } from '../../hooks';
 
 
 function AddReviewPage(): JSX.Element {
-  const params = useParams();
-  const films = useAppSelector((state) => state.films);
-  const film = films.find((element) => element.id.toString() === params.id);
+  const film = useAppSelector((state) => state.film);
   if (film) {
     return (
       <section className="film-card film-card--full">
@@ -47,7 +45,7 @@ function AddReviewPage(): JSX.Element {
           </header>
 
           <div className="film-card__poster film-card__poster--small">
-            <img src={film.previewImage} alt={`${film.name} poster`} width="218" height="327" />
+            <img src={film.posterImage} alt={`${film.name} poster`} width="218" height="327" />
           </div>
         </div>
 

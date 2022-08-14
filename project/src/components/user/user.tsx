@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-action';
 
 function User(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  const logoutHandle = (evt: React.SyntheticEvent): void => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
     return (
@@ -14,7 +21,7 @@ function User(): JSX.Element {
           </div>
         </li>
         <li className="user-block__item">
-          <a className="user-block__link">Sign out</a>
+          <a className="user-block__link" onClick={logoutHandle}>Sign out</a>
         </li>
       </ul>
     );

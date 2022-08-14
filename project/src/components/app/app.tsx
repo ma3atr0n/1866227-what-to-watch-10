@@ -6,23 +6,20 @@ import FilmPage from '../../pages/film-page/film-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NoPage from '../../pages/no-page/no-page';
-import { AppRoute } from '../../const';
+import { AppRoute, LoadingObject } from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
-import { Reviews } from '../../types/reviews';
 import { useAppSelector } from '../../hooks';
 import { Loading } from '../loading/loading';
-import { isCheckedAuth } from '../../film';
+import { isAuthStatusUnknown } from '../../film';
 import HistoryRouter from '../../history-route';
 import browserHistory from '../../browser-history';
 
-type AppPageProps = {
-  filmReviews: Reviews
-};
+function App(): JSX.Element {
 
-function App({filmReviews}: AppPageProps): JSX.Element {
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const loadingObject = useAppSelector((state) => state.loadingObject);
 
-  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+  if (isAuthStatusUnknown(authorizationStatus) || loadingObject === LoadingObject.Root) {
     return (
       <Loading />
     );
@@ -42,7 +39,7 @@ function App({filmReviews}: AppPageProps): JSX.Element {
           </PrivateRoute>
         }
         />
-        <Route path={`${AppRoute.Films}/:id`} element = {<FilmPage filmReviews={filmReviews}/>}/>
+        <Route path={`${AppRoute.Films}/:id`} element = {<FilmPage />}/>
         <Route path={`${AppRoute.Films}/:id/${AppRoute.AddReview}`} element = {<AddReviewPage />}/>
 
         <Route path={`${AppRoute.Player}/:id`} element = {<PlayerPage />}/>

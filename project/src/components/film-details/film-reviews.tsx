@@ -1,12 +1,21 @@
-import { Reviews } from '../../types/reviews';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import FilmReview from '../../components/film-details/film-review';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchReviewsAction } from '../../store/api-action';
 
-type FilmReviewsProps = {
-  filmReviews: Reviews | undefined
-}
+function FilmReviews(): JSX.Element {
+  const {id} = useParams();
+  const dispatch = useAppDispatch();
 
-function FilmReviews({filmReviews}: FilmReviewsProps): JSX.Element {
-  if (filmReviews) {
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchReviewsAction(id));
+    }
+  },[dispatch, id]);
+
+  const filmReviews = useAppSelector((state) => state.reviews);
+  if (filmReviews.length > 0) {
     return (
       <div className="film-card__reviews film-card__row">
         <div className="film-card__reviews-col">
