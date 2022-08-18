@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import {AppRoute, AuthorizationStatus, LoadingObject} from '../../const';
+import {AppRoute, LoadingObject} from '../../const';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useEffect } from 'react';
