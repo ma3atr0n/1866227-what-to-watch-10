@@ -62,7 +62,7 @@ function MainPage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.Auth && <MyListButton film={filmPromo}/>}
+                <MyListButton film={filmPromo}/>
               </div>
             </div>
           </div>
