@@ -1,4 +1,5 @@
 
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 type LogoProps = {
@@ -17,4 +18,4 @@ function Logo({light}: LogoProps): JSX.Element {
   );
 }
 
-export default Logo;
+export default React.memo(Logo);

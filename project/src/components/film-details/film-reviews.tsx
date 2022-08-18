@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import FilmReview from '../../components/film-details/film-review';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviewsAction } from '../../store/api-action';
+import { getReviews } from '../../store/review-data/selectors';
 
 function FilmReviews(): JSX.Element {
   const {id} = useParams();
@@ -14,7 +15,7 @@ function FilmReviews(): JSX.Element {
     }
   },[dispatch, id]);
 
-  const filmReviews = useAppSelector((state) => state.reviews);
+  const filmReviews = useAppSelector(getReviews);
   if (filmReviews.length > 0) {
     return (
       <div className="film-card__reviews film-card__row">

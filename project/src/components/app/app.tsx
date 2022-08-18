@@ -6,24 +6,13 @@ import FilmPage from '../../pages/film-page/film-page';
 import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NoPage from '../../pages/no-page/no-page';
-import { AppRoute, LoadingObject } from '../../const';
+import { AppRoute} from '../../const';
 import PrivateRoute from '../../components/private-route/private-route';
-import { useAppSelector } from '../../hooks';
-import { Loading } from '../loading/loading';
-import { isAuthStatusUnknown } from '../../film';
 import HistoryRouter from '../../history-route';
 import browserHistory from '../../browser-history';
 
+
 function App(): JSX.Element {
-
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const loadingObject = useAppSelector((state) => state.loadingObject);
-
-  if (isAuthStatusUnknown(authorizationStatus) || loadingObject === LoadingObject.Root) {
-    return (
-      <Loading />
-    );
-  }
 
   return (
     <HistoryRouter history={browserHistory}>

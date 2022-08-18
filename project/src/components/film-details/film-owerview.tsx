@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-data/selectors';
 
 type RatingNameType = {
   [key: string]: number[]
@@ -20,8 +21,9 @@ const getRatingName = (rate: number) => {
 
 
 function FilmOverview(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
-  if (film) {
+  const film = useAppSelector(getFilm);
+
+  if (film.id) {
     return (
       <>
         <div className="film-rating">

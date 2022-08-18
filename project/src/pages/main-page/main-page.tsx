@@ -1,31 +1,42 @@
-import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus, LoadingObject} from '../../const';
 import { useNavigate } from 'react-router-dom';
-import { GenreList } from '../../components/genre-list/genre-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { ShowMore } from '../../components/show-more/show-more';
 import { useEffect } from 'react';
-import { resetFilmCount } from '../../store/action';
-import { User } from '../../components/user/user';
+import User from '../../components/user/user';
+import { getFilmPromo } from '../../store/film-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import MyListButton from '../../components/my-list-button.tsx/my-list-button';
+import FilmsSection from '../../components/films-section/films-section';
+import { resetFilmCount } from '../../store/app-process/app-process';
+import PageLoader from '../../components/loader/loader';
+import { getLoadingObject } from '../../store/app-process/selectors';
+import { isAuthStatusUnknown } from '../../film';
 
 
 function MainPage(): JSX.Element {
   const navigate = useNavigate();
-  const showCount = useAppSelector((state) => state.showCount);
-  const filmsByGenre = useAppSelector((state) => state.filmsByGenre);
+  const filmPromo = useAppSelector(getFilmPromo);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const loadingObject = useAppSelector(getLoadingObject);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => () => {
     dispatch(resetFilmCount());
-  }, []);
+  }, [dispatch]);
+
+  if (isAuthStatusUnknown(authorizationStatus) || loadingObject === LoadingObject.Films) {
+    return (
+      <PageLoader />
+    );
+  }
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={`${filmPromo && filmPromo.backgroundImage}`} alt={`${filmPromo && filmPromo.name}`} />
         </div>
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
@@ -36,29 +47,22 @@ function MainPage(): JSX.Element {
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={`${filmPromo && filmPromo.posterImage}`} alt={`${filmPromo && filmPromo.posterImage} poster`} width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{`${filmPromo && filmPromo.name}`}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{`${filmPromo && filmPromo.genre}`}</span>
+                <span className="film-card__year">{`${filmPromo && filmPromo.released}`}</span>
               </p>
               <div className="film-card__buttons">
-                <button onClick={() => navigate(`${AppRoute.Player}/1`)} className="btn btn--play film-card__button" type="button">
+                <button onClick={() => navigate(`${AppRoute.Player}/${filmPromo && filmPromo.id}`)} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-
-                <button onClick={() => navigate(AppRoute.MyList)} className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                {authorizationStatus === AuthorizationStatus.Auth && <MyListButton film={filmPromo}/>}
               </div>
             </div>
           </div>
@@ -66,15 +70,7 @@ function MainPage(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <GenreList />
-
-          <FilmList />
-
-          {showCount < filmsByGenre.length && <ShowMore />}
-        </section>
+        <FilmsSection />
 
         <footer className="page-footer">
           <Logo light />
@@ -89,3 +85,5 @@ function MainPage(): JSX.Element {
 }
 
 export default MainPage;
+
+

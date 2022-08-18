@@ -47,5 +47,13 @@ export enum APIRoute {
 
 export enum LoadingObject {
   Root = 'root',
+  Films = 'films',
   Film = 'film',
+}
+
+export enum NameSpace {
+  FilmData = 'FILM_DATA',
+  ReviewData = 'REVIEW_DATA',
+  App = 'APP',
+  User = 'USER'
 }

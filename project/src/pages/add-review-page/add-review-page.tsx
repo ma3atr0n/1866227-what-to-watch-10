@@ -4,10 +4,11 @@ import NoPage from '../../pages/no-page/no-page';
 import {AppRoute} from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
 import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-data/selectors';
 
 
 function AddReviewPage(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
+  const film = useAppSelector(getFilm);
   if (film) {
     return (
       <section className="film-card film-card--full">

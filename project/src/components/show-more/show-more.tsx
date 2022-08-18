@@ -1,5 +1,6 @@
+import React from 'react';
 import { useAppDispatch } from '../../hooks';
-import { showMore } from '../../store/action';
+import { showMore } from '../../store/app-process/app-process';
 
 function ShowMore(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -10,4 +11,4 @@ function ShowMore(): JSX.Element {
   );
 }
 
-export {ShowMore};
+export default React.memo(ShowMore);

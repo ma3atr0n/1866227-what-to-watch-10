@@ -1,9 +1,10 @@
 import { useAppSelector } from '../../hooks';
+import { getFilm } from '../../store/film-data/selectors';
 import { getTimeFromMins } from '../../utils/common';
 
 
 function FilmDetails(): JSX.Element {
-  const film = useAppSelector((state) => state.film);
+  const film = useAppSelector(getFilm);
   if (film) {
     return (
       <div className="film-card__text film-card__row">

@@ -36,7 +36,7 @@ export const createAPI = (): AxiosInstance => {
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError) => {
-      if (error.response && shouldDisplayError(error.response) && (error.response.status !== 401 || error.response.config.url !== '/login')) {
+      if (error.response && shouldDisplayError(error.response) && (error.response.status !== 401)) {
         toast.error(error.response.data.error, {
           position: 'top-right',
           autoClose: 1500,

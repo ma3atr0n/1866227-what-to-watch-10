@@ -1,20 +1,20 @@
 import FilmCard from '../../components/film-card/film-card';
 import { useAppSelector } from '../../hooks';
+import { getShowCount } from '../../store/app-process/selectors';
+import { Films } from '../../types/films';
 
 type FilmListProps = {
-  genre?: string,
+  films: Films,
   count?: number
 }
 
-function FilmList({genre, count = 4}: FilmListProps): JSX.Element {
-  let films = useAppSelector((state) => state.filmsByGenre);
-  const stateFilms = useAppSelector((state) => state.films);
-  const showCount = useAppSelector((state) => state.showCount);
-  if (genre) {
-    const moreLikeFilms = stateFilms.filter((film) => film.genre === genre).slice(0,count);
+function FilmList({films, count}: FilmListProps): JSX.Element {
+  const showCount = useAppSelector(getShowCount);
+  if (count) {
+    const moreLikeFilms = films.slice(0,count);
     films = moreLikeFilms;
   }
-  films = films.slice(0, showCount);
+  films = films.slice(0, Math.max(showCount, count ?? 0));
   return (
     <div className="catalog__films-list">
       {films.map((film) => <FilmCard key={film.id} film={film}/>)}
