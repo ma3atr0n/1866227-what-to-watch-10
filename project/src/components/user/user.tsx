@@ -3,12 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-action';
-import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 
 function User(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
 
   const logoutHandle = (evt: React.SyntheticEvent): void => {
     evt.preventDefault();
@@ -20,7 +21,7 @@ function User(): JSX.Element {
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar" onClick={() => navigate(AppRoute.MyList)}>
-            <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+            <img src={userData.avatarUrl} alt="User avatar" width="63" height="63" />
           </div>
         </li>
         <li className="user-block__item">
@@ -37,5 +38,5 @@ function User(): JSX.Element {
   );
 }
 
-export default User;
+export default React.memo(User);
 

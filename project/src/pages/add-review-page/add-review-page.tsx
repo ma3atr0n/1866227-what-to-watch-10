@@ -1,14 +1,35 @@
 import Logo from '../../components/logo/logo';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import NoPage from '../../pages/no-page/no-page';
-import {AppRoute} from '../../const';
+import {AppRoute, LoadingObject} from '../../const';
 import AddReviewForm from '../../components/add-review-form/add-review-form';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getFilm } from '../../store/film-data/selectors';
+import { useEffect } from 'react';
+import { fetchFilmAction } from '../../store/api-action';
+import PageLoader from '../../components/loader/loader';
+import { getLoadingObject } from '../../store/app-process/selectors';
+import User from '../../components/user/user';
 
 
 function AddReviewPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm);
+  const loadingObject = useAppSelector(getLoadingObject);
+  const {id} = useParams();
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchFilmAction(id));
+    }
+  }, [dispatch, id]);
+
+  if (loadingObject === LoadingObject.Film) {
+    return (
+      <PageLoader />
+    );
+  }
+
   if (film) {
     return (
       <section className="film-card film-card--full">
@@ -33,16 +54,7 @@ function AddReviewPage(): JSX.Element {
               </ul>
             </nav>
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link">Sign out</a>
-              </li>
-            </ul>
+            <User />
           </header>
 
           <div className="film-card__poster film-card__poster--small">

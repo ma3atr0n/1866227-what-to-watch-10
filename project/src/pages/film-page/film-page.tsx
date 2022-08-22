@@ -68,7 +68,7 @@ function FilmPage(): JSX.Element {
                     </svg>
                     <span>Play</span>
                   </button>
-                  {authorizationStatus === AuthorizationStatus.Auth && <MyListButton film={film}/>}
+                  <MyListButton film={film}/>
                   {authorizationStatus === AuthorizationStatus.Auth && <Link to = 'review' className="btn film-card__button">Add review</Link>}
                 </div>
               </div>

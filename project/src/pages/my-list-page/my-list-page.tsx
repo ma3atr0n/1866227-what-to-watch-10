@@ -1,11 +1,19 @@
+import { useEffect } from 'react';
 import FilmList from '../../components/film-list/film-list';
 import Logo from '../../components/logo/logo';
 import User from '../../components/user/user';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmsFavoriteAction } from '../../store/api-action';
 import { getFilmsFavorite } from '../../store/film-data/selectors';
 
 function MyListPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const filmsFavorite = useAppSelector(getFilmsFavorite);
+
+  useEffect(() => {
+    dispatch(fetchFilmsFavoriteAction());
+  }, [dispatch]);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

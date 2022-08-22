@@ -5,6 +5,7 @@ import { fetchReviewsAction, postReviewsAction } from '../api-action';
 
 const initialState: ReviewData = {
   reviews: [],
+  isFormBlocked: false,
 };
 
 export const reviewData = createSlice({
@@ -18,6 +19,13 @@ export const reviewData = createSlice({
       })
       .addCase(postReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+        state.isFormBlocked = false;
+      })
+      .addCase(postReviewsAction.pending, (state, action) => {
+        state.isFormBlocked = true;
+      })
+      .addCase(postReviewsAction.rejected, (state, action) => {
+        state.isFormBlocked = false;
       });
   }
 });

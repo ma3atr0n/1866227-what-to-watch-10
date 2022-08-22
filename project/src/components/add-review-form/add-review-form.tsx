@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewsAction } from '../../store/api-action';
+import { getIsFormBlocked } from '../../store/review-data/selectors';
 import { FormData } from '../../types/form-data';
 
 type Event = {
@@ -26,6 +27,7 @@ function AddReviewForm(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({...initialState, filmId: id});
+  const isFormBlocked = useAppSelector(getIsFormBlocked);
 
   const inputChangeHandle = (evt: Event) => {
     const value = parseInt(evt.target.value, 10);
@@ -44,7 +46,7 @@ function AddReviewForm(): JSX.Element {
 
   const RadioStar = ({index, cb}: RadioStarProps) => (
     <>
-      <input onChange={cb} className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} checked={formData.rating === index}/>
+      <input onChange={cb} className="rating__input" id={`star-${index}`} type="radio" name="rating" value={index} checked={formData.rating === index} disabled={isFormBlocked}/>
       <label className="rating__label" htmlFor={`star-${index}`}>{`Rating ${index}`}</label>
     </>
   );
@@ -61,9 +63,9 @@ function AddReviewForm(): JSX.Element {
       </div>
 
       <div className="add-review__text">
-        <textarea onChange={textareaChangeHandle} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={formData.comment}></textarea>
+        <textarea onChange={textareaChangeHandle} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={formData.comment} disabled={isFormBlocked}></textarea>
         <div className="add-review__submit">
-          <button onClick={onSumbitHandle} className="add-review__btn" type="submit">Post</button>
+          <button onClick={onSumbitHandle} className="add-review__btn" type="submit" disabled={!(formData.comment.length >= 50 && formData.comment.length <= 400) || isFormBlocked}>Post</button>
         </div>
 
       </div>

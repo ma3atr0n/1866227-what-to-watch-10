@@ -19,6 +19,7 @@ export type FilmData = {
 
 export type ReviewData = {
   reviews: Reviews,
+  isFormBlocked: boolean,
 };
 
 export type AppProcess = {
