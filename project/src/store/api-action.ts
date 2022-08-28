@@ -102,9 +102,11 @@ export const postReviewsAction = createAsyncThunk<Reviews, FormData, {
 }>(
   'data/postReviews',
   async({filmId, rating, comment}, {dispatch, extra: api}) => {
-    const {data} = await api.post<Reviews>(`${APIRoute.Comments}/${filmId}`, {rating, comment});
-    dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}`));
-    return data;
+    const obj = await api.post<Reviews>(`${APIRoute.Comments}/${filmId}`, {rating, comment});
+    if (obj.status === 200) {
+      dispatch(redirectToRoute(`${APIRoute.Films}/${filmId}`));
+    }
+    return obj.data;
   }
 );
 

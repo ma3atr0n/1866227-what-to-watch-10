@@ -21,7 +21,11 @@ const getIndex = (films: Films, film: Film): number => {
 export const filmData = createSlice({
   name: NameSpace.FilmData,
   initialState,
-  reducers: {},
+  reducers: {
+    clearFavorites: (state) => {
+      state.filmsFavorite = [];
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
@@ -29,6 +33,9 @@ export const filmData = createSlice({
       })
       .addCase(fetchFilmsFavoriteAction.fulfilled, (state, action) => {
         state.filmsFavorite = action.payload;
+      })
+      .addCase(fetchFilmsFavoriteAction.rejected, (state, action) => {
+        state.filmsFavorite = [];
       })
       .addCase(fetchFilmAction.fulfilled, (state, action) => {
         state.film = action.payload;
@@ -56,3 +63,4 @@ export const filmData = createSlice({
   }
 });
 
+export const {clearFavorites} = filmData.actions;
