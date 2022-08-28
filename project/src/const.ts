@@ -33,7 +33,10 @@ export enum Genre {
   'Kids & Family' = 'Kids & Family',
   Romance = 'Romance',
   'Sci-Fi' = 'Sci-Fi',
-  Thriller = 'Thrillers'
+  Thriller = 'Thrillers',
+  Action = 'Action',
+  Fantasy = 'Fantasy',
+  Adventure = 'Adventure',
 }
 
 export enum APIRoute {
