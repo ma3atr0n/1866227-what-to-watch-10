@@ -3,6 +3,8 @@ import Logo from '../../components/logo/logo';
 import { useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { AuthData } from '../../types/auth-data';
+import { PASSWORD_REGEXP } from '../../const';
+import { toast } from 'react-toastify';
 
 function SignInPage(): JSX.Element {
   const loginPef = useRef<HTMLInputElement | null>(null);
@@ -17,6 +19,10 @@ function SignInPage(): JSX.Element {
     evt.preventDefault();
 
     if (loginPef.current !== null && passwordRef.current !== null) {
+      if (!PASSWORD_REGEXP.exec(passwordRef.current.value)) {
+        toast.warning('Пароль должен содержать хотя бы одну букву и цифру');
+        return;
+      }
       onSubmit({
         login: loginPef.current.value,
         password: passwordRef.current.value
