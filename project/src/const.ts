@@ -61,4 +61,9 @@ export enum NameSpace {
   User = 'USER'
 }
 
+export enum ReviewFormSettings {
+  MinCommentLength = 50,
+  MaxCommentLength = 400,
+}
+
 export const PASSWORD_REGEXP = /(?=.*[0-9])(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]/g;

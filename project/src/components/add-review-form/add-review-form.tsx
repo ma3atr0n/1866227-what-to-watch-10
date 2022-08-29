@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ReviewFormSettings } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { postReviewsAction } from '../../store/api-action';
 import { getIsFormBlocked } from '../../store/review-data/selectors';
@@ -65,7 +66,7 @@ function AddReviewForm(): JSX.Element {
       <div className="add-review__text">
         <textarea onChange={textareaChangeHandle} className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" value={formData.comment} disabled={isFormBlocked} data-testid='comment'></textarea>
         <div className="add-review__submit">
-          <button onClick={onSumbitHandle} className="add-review__btn" type="submit" disabled={!(formData.comment.length >= 50 && formData.comment.length <= 400) || isFormBlocked}>Post</button>
+          <button onClick={onSumbitHandle} className="add-review__btn" type="submit" disabled={!(formData.comment.length >= ReviewFormSettings.MinCommentLength && formData.comment.length <= ReviewFormSettings.MaxCommentLength) || isFormBlocked}>Post</button>
         </div>
 
       </div>
